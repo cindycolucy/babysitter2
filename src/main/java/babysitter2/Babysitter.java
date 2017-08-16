@@ -8,9 +8,10 @@ public class Babysitter {
 
 		Scanner input = new Scanner(System.in);
 
-		System.out.println("Enter the start time in 24-hour convention.");
+		System.out.println("Enter the start time in 24-hour convention, after 5pm.");
 
 		int startTime = input.nextInt();
+
 	}
 
 }
