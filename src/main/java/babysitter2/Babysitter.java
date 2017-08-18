@@ -11,7 +11,7 @@ public class Babysitter {
 
 	public boolean isValidEndTime(int endTime) {
 		
-		return true;
+		return endTime == 4;
 	}
 
 }

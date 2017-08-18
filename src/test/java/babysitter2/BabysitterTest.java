@@ -33,8 +33,13 @@ public class BabysitterTest {
 	}
 
 	@Test
-	public void whenEndTimeIsBeforeFourAmEndTimeIsValid() {
+	public void whenEndTimeIsAtFourAmEndTimeIsValid() {
 		int endTime = 4;
 		assertTrue(babysitter.isValidEndTime(endTime));
+	}
+	@Test
+	public void whenEndTimeIsAfterFourAmEndTimeIsFalse() {
+		int endTime = 5;
+		assertFalse(babysitter.isValidEndTime(endTime));
 	}
 }
