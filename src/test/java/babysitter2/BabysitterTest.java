@@ -42,4 +42,9 @@ public class BabysitterTest {
 		int endTime = 5;
 		assertFalse(babysitter.isValidEndTime(endTime));
 	}
+	@Test
+	public void whenEndTimeIsBeforeFourAmEndTimeIsValid() {
+		int endTime = 3;
+		assertTrue(babysitter.isValidEndTime(endTime));
+	}
 }
