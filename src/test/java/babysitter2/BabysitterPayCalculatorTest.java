@@ -69,14 +69,31 @@ public class BabysitterPayCalculatorTest {
 		assertTrue(underTest(17, 18).isValidEndTime());
 	}
 
+	//calculate pay
 	@Test
 	public void whenStartTimeIsFivePmAndBedTimeIsEightPmAndEndTimeIsEightPmShouldReturnThirtySixDollars() {
-		int response = underTest(17, 20, 20).calculatePay();
+		int response = underTest(17, 20, 20).calculateFromStartToBedtime();
 		assertEquals(36, response);
 	}
+	
 	@Test
 	public void whenStartTimeIsSixPmAndBedTimeIsEightPmAndEndTimeIsEightPmShouldReturnTwentyFourDollars() {
 		int response = underTest(18, 20, 20).calculatePay();
 		assertEquals(24, response);
+	}
+	@Test
+	public void whenStartTimeIsSixPmAndBedTimeIsEightPmAndEndTimeIsNinePmShouldReturnThirtyTwoDollars() {
+		int response = underTest(18, 20, 21).calculatePay();
+		assertEquals(32, response);
+	}
+	@Test
+	public void whenStartTimeIsSixPmAndBedTimeIsEightPmAndEndTimeIsTenPmShouldReturnFortyDollars() {
+		int response = underTest(18, 20, 22).calculatePay();
+		assertEquals(40, response);
+	}
+	@Test
+	public void shouldReturnThirtyTwoFromMidnightToTwoAm() {
+		int response = underTest(18, 20, 2).calculateFromMidnightToEndTime();
+		assertEquals(32, response);
 	}
 }

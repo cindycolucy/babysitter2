@@ -29,7 +29,16 @@ public class BabysitterPayCalculator {
 		return endTime <= 4 || endTime >= 18;
 	}
 	public int calculatePay() {
-		return (endTime - startTime)*12;
+		return calculateFromStartToBedtime() + calculateFromBedtimeToEndTimeLessThanMidnight();
+	}
+	public int calculateFromStartToBedtime() {
+		return (bedTime-startTime)*12;
+	}
+	public int calculateFromBedtimeToEndTimeLessThanMidnight() {
+		return (endTime-bedTime)*8;
+	}
+	public int calculateFromMidnightToEndTime() {
+		return (endTime-0)*16;
 	}
 
 }
