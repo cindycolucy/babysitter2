@@ -107,5 +107,8 @@ public class BabysitterPayCalculatorTest {
 	public void whenBedTimeIsEightIsValid() {
 		assertTrue(underTest(18, 20, 1).isValidBedtime());
 	}
+	public void whenBedTimeIsElevenIsValid() {
+		assertTrue(underTest(18, 23, 1).isValidBedtime());
+	}
 	
 }

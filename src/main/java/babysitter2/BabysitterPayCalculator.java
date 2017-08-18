@@ -58,7 +58,7 @@ public class BabysitterPayCalculator {
 	}
 
 	public boolean isValidBedtime() {
-		return true;
+		return bedTime < 24;
 	}
 
 }
