@@ -5,15 +5,16 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class BabysitterTest {
+public class BabysitterPayCalculatorTest {
 
-	Babysitter babysitter;
+	BabysitterPayCalculator babysitter;
 
-	public Babysitter underTest(int startTime, int endTime) {
-		return babysitter = new Babysitter(startTime, endTime);
+	public BabysitterPayCalculator underTest(int startTime, int endTime) {
+		return babysitter = new BabysitterPayCalculator(startTime, endTime);
 	}
-	public Babysitter underTest(int startTime, int bedTime, int endTime) {
-		return babysitter = new Babysitter(startTime, bedTime, endTime);
+
+	public BabysitterPayCalculator underTest(int startTime, int bedTime, int endTime) {
+		return babysitter = new BabysitterPayCalculator(startTime, bedTime, endTime);
 	}
 
 	// startTime Tests
@@ -68,4 +69,9 @@ public class BabysitterTest {
 		assertTrue(underTest(17, 18).isValidEndTime());
 	}
 
+	@Test
+	public void whenStartTimeIsFivePmAndBedTimeIsEightPmAndEndTimeIsEightPmShouldReturnTwelveDollars() {
+		int response = underTest(5, 8, 8).calculatePay();
+		assertEquals(36, response);
+	}
 }

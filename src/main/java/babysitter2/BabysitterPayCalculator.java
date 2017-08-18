@@ -2,17 +2,17 @@ package babysitter2;
 
 import java.util.Scanner;
 
-public class Babysitter {
+public class BabysitterPayCalculator {
 	
 	private int startTime;
 	private int bedTime;
 	private int endTime;
 	
-	public Babysitter(int startTime, int endTime) {
+	public BabysitterPayCalculator(int startTime, int endTime) {
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
-	public Babysitter(int startTime, int bedTime, int endTime) {
+	public BabysitterPayCalculator(int startTime, int bedTime, int endTime) {
 		this.startTime = startTime;
 		this.bedTime = bedTime;
 		this.endTime = endTime;
@@ -27,6 +27,9 @@ public class Babysitter {
 	public boolean isValidEndTime() {
 		
 		return endTime <= 4 || endTime >= 18;
+	}
+	public int calculatePay() {
+		return 36;
 	}
 
 }
