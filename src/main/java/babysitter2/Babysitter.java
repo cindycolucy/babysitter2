@@ -9,4 +9,9 @@ public class Babysitter {
 		return startTime >= 17;
 	}
 
+	public boolean isValidEndTime(int endTime) {
+		
+		return true;
+	}
+
 }

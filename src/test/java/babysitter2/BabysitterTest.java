@@ -31,4 +31,10 @@ public class BabysitterTest {
 		int startTime = 18;
 		assertTrue(babysitter.isValidStartTime(startTime));
 	}
+
+	@Test
+	public void whenEndTimeIsBeforeFourAmEndTimeIsValid() {
+		int endTime = 4;
+		assertTrue(babysitter.isValidEndTime(endTime));
+	}
 }
