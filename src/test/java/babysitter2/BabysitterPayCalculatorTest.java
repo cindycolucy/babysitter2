@@ -101,5 +101,10 @@ public class BabysitterPayCalculatorTest {
 		int response = underTest(18, 20, 1).calculatePay();
 		assertEquals(72, response);
 	}
+	//assuming bedtime is always before midnight
+	@Test
+	public void whenBedTimeIsEightIsValid() {
+		assertTrue(underTest(18, 20, 1).isValidBedtime());
+	}
 	
 }
