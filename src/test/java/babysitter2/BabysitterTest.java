@@ -8,69 +8,60 @@ import org.junit.Test;
 public class BabysitterTest {
 
 	Babysitter babysitter;
+	
 
-	@Before
-	public void setup() {
-		babysitter = new Babysitter();
+	public Babysitter underTest(int startTime, int endTime) {
+		return babysitter = new Babysitter(startTime, endTime);
+		
 	}
 
 	@Test
 	public void whenStartTimeIsBeforeFivePmStartTimeIsFalse() {
-		int startTime = 16;
-		assertFalse(babysitter.isValidStartTime(startTime));
+		assertFalse(underTest(16, 18).isValidStartTime());
 	}
 
 	@Test
 	public void whenStartTimeIsAtFivePmStartTimeIsValid() {
-		int startTime = 17;
-		assertTrue(babysitter.isValidStartTime(startTime));
+		assertTrue(underTest(17, 18).isValidStartTime());
 	}
 
 	@Test
 	public void whenStartTimeIsAtSixPmStartTimeIsValid() {
-		int startTime = 18;
-		assertTrue(babysitter.isValidStartTime(startTime));
+		assertTrue(underTest(18, 18).isValidStartTime());
 	}
 
 	@Test
 	public void whenEndTimeIsAtFourAmEndTimeIsValid() {
-		int endTime = 4;
-		assertTrue(babysitter.isValidEndTime(endTime));
+		assertTrue(underTest(17, 4).isValidEndTime());
 	}
 
 	@Test
 	public void whenEndTimeIsAfterFourAmEndTimeIsFalse() {
-		int endTime = 5;
-		assertFalse(babysitter.isValidEndTime(endTime));
+		assertFalse(underTest(17, 5).isValidEndTime());
 	}
 
 	@Test
 	public void whenEndTimeIsBeforeFourAmEndTimeIsValid() {
-		int endTime = 3;
-		assertTrue(babysitter.isValidEndTime(endTime));
+		assertTrue(underTest(17, 3).isValidEndTime());
 	}
 
 	@Test
 	public void whenEndTimeIsAtElevenPmEndTimeIsValid() {
-		int endTime = 23;
-		assertTrue(babysitter.isValidEndTime(endTime));
+		assertTrue(underTest(17, 23).isValidEndTime());
 	}
 
 	@Test
 	public void whenEndTimeIsAtTenPmEndTimeIsValid() {
-		int endTime = 22;
-		assertTrue(babysitter.isValidEndTime(endTime));
+		assertTrue(underTest(17, 22).isValidEndTime());
 	}
 
 	@Test
 	public void whenEndTimeIsFivePmEndTimeIsFalse() {
-		int endTime = 17;
-		assertFalse(babysitter.isValidEndTime(endTime));
+		assertFalse(underTest(17, 17).isValidEndTime());
 	}
 
 	@Test
 	public void whenEndTimeIsSixPmEndTimeIsValid() {
-		int endTime = 18;
-		assertTrue(babysitter.isValidEndTime(endTime));
+		assertTrue(underTest(17, 18).isValidEndTime());
 	}
 }
