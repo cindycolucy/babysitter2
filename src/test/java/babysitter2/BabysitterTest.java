@@ -1,6 +1,6 @@
 package babysitter2;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,5 +18,11 @@ public class BabysitterTest {
 	public void whenStartTimeIsBeforeFivePmStartTimeIsFalse() {
 		int startTime = 16;
 		assertFalse(babysitter.isValidStartTime(startTime));
+	}
+
+	@Test
+	public void whenStartTimeIsAtFivePmStartTimeIsValid() {
+		int startTime = 17;
+		assertTrue(babysitter.isValidStartTime(startTime));
 	}
 }
