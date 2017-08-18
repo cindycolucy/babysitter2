@@ -29,7 +29,7 @@ public class BabysitterPayCalculator {
 		return endTime <= 4 || endTime >= 18;
 	}
 	public int calculatePay() {
-		return 36;
+		return (endTime - startTime)*12;
 	}
 
 }

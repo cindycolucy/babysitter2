@@ -70,8 +70,13 @@ public class BabysitterPayCalculatorTest {
 	}
 
 	@Test
-	public void whenStartTimeIsFivePmAndBedTimeIsEightPmAndEndTimeIsEightPmShouldReturnTwelveDollars() {
-		int response = underTest(5, 8, 8).calculatePay();
+	public void whenStartTimeIsFivePmAndBedTimeIsEightPmAndEndTimeIsEightPmShouldReturnThirtySixDollars() {
+		int response = underTest(17, 20, 20).calculatePay();
 		assertEquals(36, response);
+	}
+	@Test
+	public void whenStartTimeIsSixPmAndBedTimeIsEightPmAndEndTimeIsEightPmShouldReturnTwentyFourDollars() {
+		int response = underTest(18, 20, 20).calculatePay();
+		assertEquals(24, response);
 	}
 }
