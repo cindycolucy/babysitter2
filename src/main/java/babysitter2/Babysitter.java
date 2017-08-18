@@ -6,7 +6,7 @@ public class Babysitter {
 
 	public boolean isValidStartTime(int startTime) {
 		
-		return startTime == 17;
+		return startTime >= 17;
 	}
 
 }

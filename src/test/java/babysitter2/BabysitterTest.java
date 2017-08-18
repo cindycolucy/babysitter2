@@ -25,4 +25,10 @@ public class BabysitterTest {
 		int startTime = 17;
 		assertTrue(babysitter.isValidStartTime(startTime));
 	}
+
+	@Test
+	public void whenStartTimeIsAtSixPmStartTimeIsValid() {
+		int startTime = 18;
+		assertTrue(babysitter.isValidStartTime(startTime));
+	}
 }
