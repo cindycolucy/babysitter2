@@ -104,14 +104,17 @@ public class BabysitterPayCalculatorTest {
 	
 	//assuming bedtime is always before midnight
 	@Test
-	public void whenBedTimeIsEightIsValid() {
+	public void whenBedTimeIsEightPmIsValid() {
 		assertTrue(underTest(18, 20, 1).isValidBedtime());
 	}
-	public void whenBedTimeIsElevenIsValid() {
+	public void whenBedTimeIsElevenPmIsValid() {
 		assertTrue(underTest(18, 23, 1).isValidBedtime());
 	}
 	public void whenBedTimeIsMidnightIsNotValid() {
 		assertFalse(underTest(18, 0, 1).isValidBedtime());
+	}
+	public void whenBedTimeIsOneAmIsNotValid() {
+		assertFalse(underTest(18, 1, 1).isValidBedtime());
 	}
 	
 }
