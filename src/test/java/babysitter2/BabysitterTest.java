@@ -8,13 +8,15 @@ import org.junit.Test;
 public class BabysitterTest {
 
 	Babysitter babysitter;
-	
 
 	public Babysitter underTest(int startTime, int endTime) {
 		return babysitter = new Babysitter(startTime, endTime);
-		
+	}
+	public Babysitter underTest(int startTime, int bedTime, int endTime) {
+		return babysitter = new Babysitter(startTime, bedTime, endTime);
 	}
 
+	// startTime Tests
 	@Test
 	public void whenStartTimeIsBeforeFivePmStartTimeIsFalse() {
 		assertFalse(underTest(16, 18).isValidStartTime());
@@ -29,6 +31,7 @@ public class BabysitterTest {
 	public void whenStartTimeIsAtSixPmStartTimeIsValid() {
 		assertTrue(underTest(18, 18).isValidStartTime());
 	}
+	// endTime Tests
 
 	@Test
 	public void whenEndTimeIsAtFourAmEndTimeIsValid() {
@@ -64,4 +67,5 @@ public class BabysitterTest {
 	public void whenEndTimeIsSixPmEndTimeIsValid() {
 		assertTrue(underTest(17, 18).isValidEndTime());
 	}
+
 }
