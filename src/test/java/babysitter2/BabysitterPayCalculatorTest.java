@@ -96,4 +96,10 @@ public class BabysitterPayCalculatorTest {
 		int response = underTest(18, 20, 2).calculateFromMidnightToEndTime();
 		assertEquals(32, response);
 	}
+	@Test
+	public void whenStartTimeIsSixPmAndBedTimeIsEightPmAndEndTimeIsOneAmShouldReturnSeventyTwoDollars() {
+		int response = underTest(18, 20, 1).calculatePay();
+		assertEquals(72, response);
+	}
+	
 }
