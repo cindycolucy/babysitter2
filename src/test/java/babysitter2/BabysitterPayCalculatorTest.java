@@ -19,7 +19,7 @@ public class BabysitterPayCalculatorTest {
 
 	// startTime Tests
 	@Test
-	public void whenStartTimeIsBeforeFivePmStartTimeIsFalse() {
+	public void whenStartTimeIsBeforeFivePmStartTimeIsNotValid() {
 		assertFalse(underTest(16, 18).isValidStartTime());
 	}
 
@@ -32,15 +32,15 @@ public class BabysitterPayCalculatorTest {
 	public void whenStartTimeIsAtSixPmStartTimeIsValid() {
 		assertTrue(underTest(18, 18).isValidStartTime());
 	}
-	// endTime Tests
 
+	// endTime Tests
 	@Test
 	public void whenEndTimeIsAtFourAmEndTimeIsValid() {
 		assertTrue(underTest(17, 4).isValidEndTime());
 	}
 
 	@Test
-	public void whenEndTimeIsAfterFourAmEndTimeIsFalse() {
+	public void whenEndTimeIsAfterFourAmEndTimeIsNotValid() {
 		assertFalse(underTest(17, 5).isValidEndTime());
 	}
 
@@ -60,7 +60,7 @@ public class BabysitterPayCalculatorTest {
 	}
 
 	@Test
-	public void whenEndTimeIsFivePmEndTimeIsFalse() {
+	public void whenEndTimeIsFivePmEndTimeIsNotValid() {
 		assertFalse(underTest(17, 17).isValidEndTime());
 	}
 
@@ -69,7 +69,7 @@ public class BabysitterPayCalculatorTest {
 		assertTrue(underTest(17, 18).isValidEndTime());
 	}
 
-	// calculate pay
+	// calculate pay Tests
 	@Test
 	public void whenStartTimeIsFivePmAndBedTimeIsEightPmAndEndTimeIsEightPmShouldReturnThirtySixDollars() {
 		int response = underTest(17, 20, 20).calculateFromStartToBedtime();
@@ -106,7 +106,8 @@ public class BabysitterPayCalculatorTest {
 		assertEquals(72, response);
 	}
 
-	// assuming bedtime is always before midnight
+	// bedtime Tests
+	// assuming bedtime is supposed to be before midnight
 	@Test
 	public void whenBedTimeIsEightPmIsValid() {
 		assertTrue(underTest(18, 20, 1).isValidBedtime());
@@ -116,7 +117,7 @@ public class BabysitterPayCalculatorTest {
 	public void whenBedTimeIsElevenPmIsValid() {
 		assertTrue(underTest(18, 23, 1).isValidBedtime());
 	}
-	
+
 	@Test
 	public void whenBedTimeIsMidnightIsNotValid() {
 		assertFalse(underTest(18, 0, 1).isValidBedtime());

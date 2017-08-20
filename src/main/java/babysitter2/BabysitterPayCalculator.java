@@ -22,12 +22,14 @@ public class BabysitterPayCalculator {
 
 	// assuming midnight is cutoff for start time
 	public boolean isValidStartTime() {
-
 		return startTime >= 17;
 	}
 
-	public boolean isValidEndTime() {
+	public boolean isValidBedtime() {
+		return bedTime >= 17 && bedTime <= 23;
+	}
 
+	public boolean isValidEndTime() {
 		return endTime <= 4 || endTime >= 18;
 	}
 
@@ -55,10 +57,6 @@ public class BabysitterPayCalculator {
 
 	public int calculateFromMidnightToEndTime() {
 		return (endTime - 0) * 16;
-	}
-
-	public boolean isValidBedtime() {
-		return bedTime >= 17 && bedTime <= 23;
 	}
 
 }
