@@ -8,7 +8,7 @@ public class BabysitterPayCalculatorApp {
 		Scanner input = new Scanner(System.in);
 
 		BabysitterPayCalculator babysitter;
-		
+
 		System.out.println("Enter the start time in 24-hour convention, after 5pm.");
 
 		int startTime = input.nextInt();
@@ -29,8 +29,9 @@ public class BabysitterPayCalculatorApp {
 			System.out.println("That is not a valid bedtime. Try again.");
 		} else if (!babysitter.isValidEndTime()) {
 			System.out.println("That is not a valid  end time. Try again.");
-		}
-		System.out.println("The payment is $" + babysitter.calculatePay());
+		} else {
+			System.out.println("The payment is $" + babysitter.calculatePay());
 
+		}
 	}
 }
