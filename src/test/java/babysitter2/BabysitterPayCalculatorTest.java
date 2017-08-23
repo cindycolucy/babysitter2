@@ -1,108 +1,139 @@
 package babysitter2;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class BabysitterPayCalculatorTest {
 
-	BabysitterPayCalculator babysitter;
+	private static final int TIME_1_AM = 1;
+	private static final int TIME_8_PM = 20;
+	private static final int TIME_5_PM = 17;
+	private static final int TIME_6_PM = 18;
 
-	public BabysitterPayCalculator underTest(int startTime, int endTime) {
-		return babysitter = new BabysitterPayCalculator(startTime, endTime);
+	public BabysitterPayCalculator createUnderTest(int startTime, int endTime) {
+		return new BabysitterPayCalculator(startTime, endTime);
 	}
 
-	public BabysitterPayCalculator underTest(int startTime, int bedTime, int endTime) {
-		return babysitter = new BabysitterPayCalculator(startTime, bedTime, endTime);
+	public BabysitterPayCalculator createUnderTest(int startTime, int bedTime, int endTime) {
+		return new BabysitterPayCalculator(startTime, bedTime, endTime);
 	}
 
+	@Test(expected = UnsupportedOperationException.class)
+	public void shouldNotAllowStartTimeBefore5Pm() {
+		
+		int time4Pm = 16;
+		int time11Pm = 23;
+		BabysitterPayCalculator underTest = createUnderTest(time4Pm, time11Pm);
+		underTest.calculatePay();
+	}
+	
+	@Test(expected = UnsupportedOperationException.class)
+	public void shouldNotAllowEndTimeAfter4Am() {
+		
+		int time4Pm = 16;
+		int time5Am = 5;
+		BabysitterPayCalculator underTest = createUnderTest(time4Pm, time5Am);
+		underTest.calculatePay();
+	}
+	
 	// startTime Tests
 	@Test
 	public void whenStartTimeIsBeforeFivePmStartTimeIsNotValid() {
-		assertFalse(underTest(16, 18).isValidStartTime());
+		int time4Pm = 16;
+		assertFalse(createUnderTest(time4Pm, TIME_6_PM).isValidStartTime());
 	}
 
 	@Test
 	public void whenStartTimeIsAtFivePmStartTimeIsValid() {
-		assertTrue(underTest(17, 18).isValidStartTime());
+		assertTrue(createUnderTest(TIME_5_PM, TIME_6_PM).isValidStartTime());
 	}
 
 	@Test
 	public void whenStartTimeIsAtSixPmStartTimeIsValid() {
-		assertTrue(underTest(18, 18).isValidStartTime());
+		assertTrue(createUnderTest(TIME_6_PM, TIME_6_PM).isValidStartTime());
 	}
 
 	// endTime Tests
 	@Test
 	public void whenEndTimeIsAtFourAmEndTimeIsValid() {
-		assertTrue(underTest(17, 4).isValidEndTime());
+		int time4Am = 4;
+		assertTrue(createUnderTest(TIME_5_PM, time4Am).isValidEndTime());
 	}
 
 	@Test
 	public void whenEndTimeIsAfterFourAmEndTimeIsNotValid() {
-		assertFalse(underTest(17, 5).isValidEndTime());
+		int time5Am = 5;
+		assertFalse(createUnderTest(TIME_5_PM, time5Am).isValidEndTime());
 	}
 
 	@Test
 	public void whenEndTimeIsBeforeFourAmEndTimeIsValid() {
-		assertTrue(underTest(17, 3).isValidEndTime());
+		int time3Am = 3;
+		assertTrue(createUnderTest(TIME_5_PM, time3Am).isValidEndTime());
 	}
 
 	@Test
 	public void whenEndTimeIsAtElevenPmEndTimeIsValid() {
-		assertTrue(underTest(17, 23).isValidEndTime());
+		int time11Pm = 23;
+		assertTrue(createUnderTest(TIME_5_PM, time11Pm).isValidEndTime());
 	}
 
 	@Test
 	public void whenEndTimeIsAtTenPmEndTimeIsValid() {
-		assertTrue(underTest(17, 22).isValidEndTime());
+		int time10Pm = 22;
+		assertTrue(createUnderTest(TIME_5_PM, time10Pm).isValidEndTime());
 	}
 
 	@Test
 	public void whenEndTimeIsFivePmEndTimeIsNotValid() {
-		assertFalse(underTest(17, 17).isValidEndTime());
+		assertFalse(createUnderTest(TIME_5_PM, TIME_5_PM).isValidEndTime());
 	}
 
 	@Test
 	public void whenEndTimeIsSixPmEndTimeIsValid() {
-		assertTrue(underTest(17, 18).isValidEndTime());
+		assertTrue(createUnderTest(TIME_5_PM, TIME_6_PM).isValidEndTime());
 	}
 
 	// calculate pay Tests
 	@Test
 	public void whenStartTimeIsFivePmAndBedTimeIsEightPmAndEndTimeIsEightPmShouldReturnThirtySixDollars() {
-		int response = underTest(17, 20, 20).calculateFromStartToBedtime();
+		int response = createUnderTest(TIME_5_PM, TIME_8_PM, TIME_8_PM).calculateFromStartToBedtime();
 		assertEquals(36, response);
 	}
 
 	@Test
 	public void whenStartTimeIsSixPmAndBedTimeIsEightPmAndEndTimeIsEightPmShouldReturnTwentyFourDollars() {
-		int response = underTest(18, 20, 20).calculatePay();
+		int response = createUnderTest(TIME_6_PM, TIME_8_PM, TIME_8_PM).calculatePay();
 		assertEquals(24, response);
 	}
 
 	@Test
 	public void whenStartTimeIsSixPmAndBedTimeIsEightPmAndEndTimeIsNinePmShouldReturnThirtyTwoDollars() {
-		int response = underTest(18, 20, 21).calculatePay();
+		int time9Pm = 21;
+		int response = createUnderTest(TIME_6_PM, TIME_8_PM, time9Pm).calculatePay();
 		assertEquals(32, response);
 	}
 
 	@Test
 	public void whenStartTimeIsSixPmAndBedTimeIsEightPmAndEndTimeIsTenPmShouldReturnFortyDollars() {
-		int response = underTest(18, 20, 22).calculatePay();
+		int time10Pm = 22;
+		int response = createUnderTest(TIME_6_PM, TIME_8_PM, time10Pm).calculatePay();
 		assertEquals(40, response);
 	}
 
 	@Test
 	public void shouldReturnThirtyTwoFromMidnightToTwoAm() {
-		int response = underTest(18, 20, 2).calculateFromMidnightToEndTime();
+		int time2Am = 2;
+		int response = createUnderTest(TIME_6_PM, TIME_8_PM, time2Am).calculateFromMidnightToEndTime();
 		assertEquals(32, response);
 	}
 
 	@Test
 	public void whenStartTimeIsSixPmAndBedTimeIsEightPmAndEndTimeIsOneAmShouldReturnSeventyTwoDollars() {
-		int response = underTest(18, 20, 1).calculatePay();
+		int response = createUnderTest(TIME_6_PM, TIME_8_PM, TIME_1_AM).calculatePay();
 		assertEquals(72, response);
 	}
 
@@ -110,22 +141,24 @@ public class BabysitterPayCalculatorTest {
 	// assuming bedtime is supposed to be before midnight
 	@Test
 	public void whenBedTimeIsEightPmIsValid() {
-		assertTrue(underTest(18, 20, 1).isValidBedtime());
+		assertTrue(createUnderTest(TIME_6_PM, TIME_8_PM, TIME_1_AM).isValidBedtime());
 	}
 
 	@Test
 	public void whenBedTimeIsElevenPmIsValid() {
-		assertTrue(underTest(18, 23, 1).isValidBedtime());
+		int time11Pm = 23;
+		assertTrue(createUnderTest(TIME_6_PM, time11Pm, TIME_1_AM).isValidBedtime());
 	}
 
 	@Test
 	public void whenBedTimeIsMidnightIsNotValid() {
-		assertFalse(underTest(18, 0, 1).isValidBedtime());
+		int timeMidnight = 0;
+		assertFalse(createUnderTest(TIME_6_PM, timeMidnight, TIME_1_AM).isValidBedtime());
 	}
 
 	@Test
 	public void whenBedTimeIsOneAmIsNotValid() {
-		assertFalse(underTest(18, 1, 1).isValidBedtime());
+		assertFalse(createUnderTest(TIME_6_PM, TIME_1_AM, TIME_1_AM).isValidBedtime());
 	}
 
 }

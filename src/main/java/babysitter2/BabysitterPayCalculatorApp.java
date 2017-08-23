@@ -23,15 +23,10 @@ public class BabysitterPayCalculatorApp {
 
 		babysitter = new BabysitterPayCalculator(startTime, bedTime, endTime);
 
-		if (!babysitter.isValidStartTime()) {
-			System.out.println("That is not a valid start time. Try again.");
-		} else if (!babysitter.isValidBedtime()) {
-			System.out.println("That is not a valid bedtime. Try again.");
-		} else if (!babysitter.isValidEndTime()) {
-			System.out.println("That is not a valid end time. Try again.");
-		} else {
-			System.out.println("The payment is $" + babysitter.calculatePay());
+		System.out.println("The payment is $" + babysitter.calculatePay());
 
-		}
+		input.close();
+
 	}
+
 }

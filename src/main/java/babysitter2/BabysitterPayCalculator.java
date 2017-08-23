@@ -1,7 +1,5 @@
 package babysitter2;
 
-import java.util.Scanner;
-
 public class BabysitterPayCalculator {
 
 	private int startTime;
@@ -34,6 +32,15 @@ public class BabysitterPayCalculator {
 	}
 
 	public int calculatePay() {
+		
+		if(!isValidStartTime()) {
+			throw new UnsupportedOperationException("bad start time");
+		}
+		
+		if(!isValidEndTime()) {
+			throw new UnsupportedOperationException("bad end time");
+		}
+		
 		int pay = 0;
 		if (endTime <= 4) {
 			pay = calculateFromStartToBedtime() + calculateFromBedtimeToMidnight() + calculateFromMidnightToEndTime();
@@ -47,11 +54,11 @@ public class BabysitterPayCalculator {
 		return (bedTime - startTime) * 12;
 	}
 
-	public int calculateFromBedtimeToMidnight() {
+	private int calculateFromBedtimeToMidnight() {
 		return (24 - bedTime) * 8;
 	}
 
-	public int calculateFromBedtimeToEndTimeLessThanMidnight() {
+	private int calculateFromBedtimeToEndTimeLessThanMidnight() {
 		return (endTime - bedTime) * 8;
 	}
 
